@@ -33,22 +33,21 @@ public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
 	@NotEmpty
 	private String nombre;
-
 	@NotEmpty
 	private String apellido;
-
 	@NotEmpty
 	@Email
 	private String email;
-
 	@NotNull
 	@Column(name = "create_at")
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createAt;
+	@Column(name = "address")
+	private String address;
+
 
 	@OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<Factura> facturas;
@@ -59,18 +58,10 @@ public class Cliente {
 		facturas = new ArrayList<Factura>();
 	}
 
-	public void addFactura(Factura factura) {
-		facturas.add(factura);
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
 	
 	@Override
 	public String toString() {
 		return nombre + " " + apellido;
 	}
-	
-	private static final long serialVersionUID = 1L;
+
 }

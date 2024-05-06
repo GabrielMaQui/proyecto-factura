@@ -102,12 +102,10 @@ public class FacturaController {
 
 		for (int i = 0; i < itemId.length; i++) {
 			Producto producto = clienteService.findProductoById(itemId[i]);
-
 			ItemFactura linea = new ItemFactura();
 			linea.setCantidad(cantidad[i]);
 			linea.setProducto(producto);
 			factura.addItemFactura(linea);
-
 			log.info("ID: " + itemId[i].toString() + ", cantidad: " + cantidad[i].toString());
 		}
 

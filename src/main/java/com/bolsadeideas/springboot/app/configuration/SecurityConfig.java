@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 //igframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -33,9 +34,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         auth ->
-                        auth.requestMatchers("/", "/auth/login", "/css/**", "/js/**", "/images/**", "/listar").permitAll().anyRequest().authenticated()
+                        auth.requestMatchers("/",
+                                            "/auth/login",
+                                            "/css/**",
+                                            "/js/**",
+                                            "/images/**",
+                                            "/listar",
+                                "/resources/**",
+                                "/static/**").permitAll().anyRequest().authenticated()
 
                 )
                 .formLogin(

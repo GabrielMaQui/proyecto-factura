@@ -28,6 +28,8 @@ public class Producto {
 	@Temporal(TemporalType.DATE)
 	@Column(name = "create_at")
 	private Date createAt;
+	private Boolean activo;
+	private Integer stock;
 
 	@PrePersist
 	public void prePersist() {

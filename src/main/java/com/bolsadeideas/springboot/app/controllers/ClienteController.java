@@ -166,13 +166,10 @@ public class ClienteController {
 		}
 
 		if (!foto.isEmpty()) {
-
 			if (cliente.getId() != null && cliente.getId() > 0 && cliente.getFoto() != null
 					&& cliente.getFoto().length() > 0) {
-
 				uploadFileService.delete(cliente.getFoto());
 			}
-
 			String uniqueFilename = null;
 			try {
 				uniqueFilename = uploadFileService.copy(foto);
@@ -187,7 +184,6 @@ public class ClienteController {
 		}
 
 		String mensajeFlash = (cliente.getId() != null) ? "Cliente editado con éxito!" : "Cliente creado con éxito!";
-
 		clienteService.save(cliente);
 		status.setComplete();
 		flash.addFlashAttribute("success", mensajeFlash);
