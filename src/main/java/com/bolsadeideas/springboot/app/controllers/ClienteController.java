@@ -34,8 +34,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.bolsadeideas.springboot.app.models.entity.Cliente;
-import com.bolsadeideas.springboot.app.models.service.IClienteService;
-import com.bolsadeideas.springboot.app.models.service.IUploadFileService;
+import com.bolsadeideas.springboot.app.service.IClienteService;
+import com.bolsadeideas.springboot.app.service.IUploadFileService;
 import com.bolsadeideas.springboot.app.util.paginator.PageRender;
 
 @Controller
@@ -229,17 +229,5 @@ public class ClienteController {
 		Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
 
 		return authorities.contains(new SimpleGrantedAuthority(role));
-
-		/*
-		 * for(GrantedAuthority authority: authorities) {
-			if(role.equals(authority.getAuthority())) {
-				logger.info("Hola usuario ".concat(auth.getName()).concat(" tu role es: ".concat(authority.getAuthority())));
-				return true;
-			}
-		}
-
-		return false;
-		*/
-
 	}
 }

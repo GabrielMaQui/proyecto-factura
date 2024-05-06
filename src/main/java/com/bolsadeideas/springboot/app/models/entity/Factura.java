@@ -35,7 +35,6 @@ public class Factura {
 	@NotEmpty
 	private String descripcion;
 	private String observacion;
-
 	@Temporal(TemporalType.DATE)
 	@Column(name = "create_at")
 	private Date createAt;

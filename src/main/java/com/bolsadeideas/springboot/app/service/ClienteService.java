@@ -1,4 +1,4 @@
-package com.bolsadeideas.springboot.app.models.service;
+package com.bolsadeideas.springboot.app.service;
 
 import java.util.List;
 
@@ -8,29 +8,28 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bolsadeideas.springboot.app.models.dao.IClienteDao;
-import com.bolsadeideas.springboot.app.models.dao.IFacturaDao;
-import com.bolsadeideas.springboot.app.models.dao.IProductoDao;
+import com.bolsadeideas.springboot.app.repository.IClienteRepository;
+import com.bolsadeideas.springboot.app.repository.IFacturaRepository;
+import com.bolsadeideas.springboot.app.repository.IProductoRepository;
 import com.bolsadeideas.springboot.app.models.entity.Cliente;
 import com.bolsadeideas.springboot.app.models.entity.Factura;
 import com.bolsadeideas.springboot.app.models.entity.Producto;
 
 @Service
-public class ClienteServiceImpl implements IClienteService {
+public class ClienteService implements IClienteService {
 
 	@Autowired
-	private IClienteDao clienteDao;
+	private IClienteRepository clienteDao;
 
 	@Autowired
-	private IProductoDao productoDao;
+	private IProductoRepository productoDao;
 
 	@Autowired
-	private IFacturaDao facturaDao;
+	private IFacturaRepository facturaDao;
 
 	@Override
 	@Transactional(readOnly = true)
 	public List<Cliente> findAll() {
-		// TODO Auto-generated method stub
 		return (List<Cliente>) clienteDao.findAll();
 	}
 
@@ -82,14 +81,12 @@ public class ClienteServiceImpl implements IClienteService {
 	@Override
 	@Transactional(readOnly=true)
 	public Producto findProductoById(Long id) {
-		// TODO Auto-generated method stub
 		return productoDao.findById(id).orElse(null);
 	}
 
 	@Override
 	@Transactional(readOnly=true)
 	public Factura findFacturaById(Long id) {
-		// TODO Auto-generated method stub
 		return facturaDao.findById(id).orElse(null);
 	}
 

@@ -5,7 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.bolsadeideas.springboot.app.models.service.IUploadFileService;
+import com.bolsadeideas.springboot.app.service.IUploadFileService;
 
 @SpringBootApplication
 public class SpringBootDataJpaApplication  implements CommandLineRunner {

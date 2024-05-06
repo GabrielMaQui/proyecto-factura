@@ -1,4 +1,4 @@
-package com.bolsadeideas.springboot.app.Configuration;
+package com.bolsadeideas.springboot.app.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

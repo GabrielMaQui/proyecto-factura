@@ -1,4 +1,4 @@
-package com.bolsadeideas.springboot.app.models.service;
+package com.bolsadeideas.springboot.app.service;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,7 +17,7 @@ import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-public class UploadFileServiceImpl implements IUploadFileService {
+public class UploadFileService implements IUploadFileService {
 
 	private final Logger log = LoggerFactory.getLogger(getClass());
 

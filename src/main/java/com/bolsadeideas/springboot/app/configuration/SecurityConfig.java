@@ -1,8 +1,8 @@
-package com.bolsadeideas.springboot.app.Configuration;
+package com.bolsadeideas.springboot.app.configuration;
 
 
 import com.bolsadeideas.springboot.app.auth.LoginSuccessHandler;
-import com.bolsadeideas.springboot.app.models.service.JpaUserDetailsService;
+import com.bolsadeideas.springboot.app.service.UserDetailsService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +22,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Autowired
-    private JpaUserDetailsService detalleUsuarioService;
+    private UserDetailsService detalleUsuarioService;
 
     @Autowired
     private LoginSuccessHandler successHandler;

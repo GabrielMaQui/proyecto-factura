@@ -1,4 +1,4 @@
-package com.bolsadeideas.springboot.app.models.service;
+package com.bolsadeideas.springboot.app.service;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
