@@ -8,9 +8,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bolsadeideas.springboot.app.repository.IClienteRepository;
-import com.bolsadeideas.springboot.app.repository.IFacturaRepository;
-import com.bolsadeideas.springboot.app.repository.IProductoRepository;
+import com.bolsadeideas.springboot.app.repository.ClienteRepository;
+import com.bolsadeideas.springboot.app.repository.FacturaRepository;
+import com.bolsadeideas.springboot.app.repository.ProductoRepository;
 import com.bolsadeideas.springboot.app.models.entity.Cliente;
 import com.bolsadeideas.springboot.app.models.entity.Factura;
 import com.bolsadeideas.springboot.app.models.entity.Producto;
@@ -19,13 +19,13 @@ import com.bolsadeideas.springboot.app.models.entity.Producto;
 public class ClienteService implements IClienteService {
 
 	@Autowired
-	private IClienteRepository clienteDao;
+	private ClienteRepository clienteDao;
 
 	@Autowired
-	private IProductoRepository productoDao;
+	private ProductoRepository productoDao;
 
 	@Autowired
-	private IFacturaRepository facturaDao;
+	private FacturaRepository facturaDao;
 
 	@Override
 	@Transactional(readOnly = true)

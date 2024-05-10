@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IClienteRepository extends JpaRepository<Cliente, Long> {
+public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
     @Query("select c from Cliente c left join fetch c.facturas f where c.id=:id")
     public Cliente fetchByIdWithFacturas(@Param("id") Long id);

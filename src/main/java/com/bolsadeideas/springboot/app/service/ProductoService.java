@@ -1,7 +1,7 @@
 package com.bolsadeideas.springboot.app.service;
 
 import com.bolsadeideas.springboot.app.models.entity.Producto;
-import com.bolsadeideas.springboot.app.repository.IProductoRepository;
+import com.bolsadeideas.springboot.app.repository.ProductoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ProductoService implements IProductoService {
 
-    private IProductoRepository productoRepository;
+    private ProductoRepository productoRepository;
 
     @Override
     public List<Producto> listProductos() {

@@ -4,9 +4,13 @@
 <head th:fragment="head">
 <meta charset="UTF-8"/>
 <title th:text="'Spring Boot: MVC + Thymeleaf + Data JPA - ' + ${titulo}"></title>
-<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
 <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" />
+	<script th:src="@{/js/bootstrap.bundle.js}" type="text/javascript"></script>
 	<script th:src="@{/js/jquery.js}" type="text/javascript"></script>
+	<meta name="_csrf" th:content="${_csrf.token}" />
+	<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+
 </head>
 <body>
 	<header th:fragment="header">
@@ -19,8 +23,9 @@
 			<div class="collapse navbar-collapse">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
-					<li class="nav-item"><a class="nav-link" href="#" th:href="@{/listar}">Cliente</a></li>
-					<li class="nav-item"><a class="nav-link" href="#" th:href="@{/producto}">Producto</a></li>
+					<li class="nav-item"><a class="nav-link" href="#" th:href="@{/listar}">Clientes</a></li>
+					<li class="nav-item"><a class="nav-link" href="#" th:href="@{/producto}">Productos</a></li>
+					<li class="nav-item"><a class="nav-link" href="#" th:href="@{/seguridad/usuario}">Vendedores</a></li>
 				</ul>
 				<ul class="navbar-nav navbar-right">
 					<li sec:authorize="!isAuthenticated()"><a

@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bolsadeideas.springboot.app.repository.IUsuarioRepository;
+import com.bolsadeideas.springboot.app.repository.UsuarioRepository;
 import com.bolsadeideas.springboot.app.models.entity.Role;
 import com.bolsadeideas.springboot.app.models.entity.Usuario;
 
@@ -22,7 +22,7 @@ import com.bolsadeideas.springboot.app.models.entity.Usuario;
 public class UserDetailsService implements org.springframework.security.core.userdetails.UserDetailsService {
 
 	@Autowired
-	private IUsuarioRepository usuarioDao;
+	private UsuarioRepository usuarioDao;
 	
 	private Logger logger = LoggerFactory.getLogger(UserDetailsService.class);
 	
