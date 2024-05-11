@@ -1,9 +1,9 @@
 let token = $("meta[name='_csrf']").attr("content");
 let header = $("meta[name='_csrf_header']").attr("content");
-$(document).ajaxSend(function(e, xhr, options) {
+$(document).ajaxSend(function (e, xhr, options) {
     xhr.setRequestHeader(header, token);
 });
-$(document).on("click", "#btnagregar",function () {
+$(document).on("click", "#btnagregar", function () {
     $("#txtnomproduct").val(" ");
     $("#txtunitpriceproduct").val(" ")
     $("#txtfechacreacion").val(" ")
@@ -31,8 +31,6 @@ $(document).on("click", ".btnactualizar", function () {
 });
 
 
-
-
 $(document).on("click", "#btnguardar", function () {
     let create = convertirFechaStringADate($("#txtfechacreacion").val());
     $.ajax({
@@ -44,7 +42,7 @@ $(document).on("click", "#btnguardar", function () {
             nombre: $("#txtnomproduct").val(),
             precio: $("#txtunitpriceproduct").val(),
             createAt: create,
-            stock:  $("#txtstock").val(),
+            stock: $("#txtstock").val(),
             activo: $("#cbdiscontinued").prop("checked")
         }),
         success: function (resultado) {
@@ -53,7 +51,7 @@ $(document).on("click", "#btnguardar", function () {
             }
             alert(resultado.mensaje);
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
             console.error("Error en la solicitud AJAX:", error);
             alert("Error en la solicitud AJAX. Por favor, inténtalo de nuevo más tarde.");
         }
@@ -107,7 +105,7 @@ function listarProducto() {
                     `data-proddiscont="${value.activo}">Actualizar` +
                     `</button><td><button type="button" class="btn btn-danger btneliminar"` +
                     `data-prodcod="${value.id}">Eliminar` +
-                    `</button></td>`+
+                    `</button></td>` +
                     `</button></td>` +
                     `</tr>`);
             });

@@ -1,9 +1,9 @@
 let token = $("meta[name='_csrf']").attr("content");
 let header = $("meta[name='_csrf_header']").attr("content");
-$(document).ajaxSend(function(e, xhr, options) {
+$(document).ajaxSend(function (e, xhr, options) {
     xhr.setRequestHeader(header, token);
 });
-$(document).on("click", "#btnagregar", function(){
+$(document).on("click", "#btnagregar", function () {
     $("#txtnombre").val("");
     $("#txtapellido").val("");
     $("#txtusuario").val("");
@@ -14,12 +14,12 @@ $(document).on("click", "#btnagregar", function(){
     $("#btnenviar").hide();
     $("#modalusuario").modal("show");
 });
-$(document).on("click", ".btnactualizar", function(){
+$(document).on("click", ".btnactualizar", function () {
     $.ajax({
         type: "GET",
-        url: "/seguridad/usuario/"+$(this).attr("data-usuid"),
+        url: "/seguridad/usuario/" + $(this).attr("data-usuid"),
         dataType: "json",
-        success: function(resultado){
+        success: function (resultado) {
             $("#txtnombre").val(resultado.nombres);
             $("#txtapellido").val(resultado.apellidos);
             $("#txtusuario").val(resultado.nomusuario);
@@ -27,7 +27,7 @@ $(document).on("click", ".btnactualizar", function(){
             $("#hddidusuario").val(resultado.idusuario);
             $("#switchusuario").show();
             $("#btnenviar").show();
-            if(resultado.activo)
+            if (resultado.activo)
                 $("#cbactivo").prop("checked", true);
             else
                 $("#cbactivo").prop("checked", false);
@@ -36,7 +36,7 @@ $(document).on("click", ".btnactualizar", function(){
     $("#modalusuario").modal("show");
 })
 
-$(document).on("click", "#btnguardar", function(){
+$(document).on("click", "#btnguardar", function () {
     $.ajax({
         type: "POST",
         url: "/seguridad/usuario/registrar",
@@ -47,10 +47,10 @@ $(document).on("click", "#btnguardar", function(){
             nombres: $("#txtnombre").val(),
             apellidos: $("#txtapellido").val(),
             password: $("#txtpassword").val(),
-            enabled:  $("#cbactivo").prop("checked")
+            enabled: $("#cbactivo").prop("checked")
         }),
-        success: function(resultado){
-            if(resultado.respuesta){
+        success: function (resultado) {
+            if (resultado.respuesta) {
                 listarUsuarios()
             }
             alert(resultado.mensaje);
@@ -59,22 +59,22 @@ $(document).on("click", "#btnguardar", function(){
     $("#modalusuario").modal("hide");
 });
 
-function listarUsuarios(){
+function listarUsuarios() {
     $.ajax({
         type: "GET",
         url: "/seguridad/usuario/lista",
         dataType: "json",
-        success: function(resultado){
+        success: function (resultado) {
             $("#tblusuario > tbody").html("");
-            $.each(resultado, function(index, value){
-                $("#tblusuario > tbody").append(`<tr>`+
-                    `<td>${value.nombre}</td>`+
-                    `<td>${value.apellido}</td>`+
-                    `<td>${value.username}</td>`+
-                    `<td>${value.enabled}</td>`+
-                    `<td><button type='button' class='btn btn-primary btnactualizar' `+
-                    `data-usuid="${value.id}">Actualizar`+
-                    `</button></td>`+
+            $.each(resultado, function (index, value) {
+                $("#tblusuario > tbody").append(`<tr>` +
+                    `<td>${value.nombre}</td>` +
+                    `<td>${value.apellido}</td>` +
+                    `<td>${value.username}</td>` +
+                    `<td>${value.enabled}</td>` +
+                    `<td><button type='button' class='btn btn-primary btnactualizar' ` +
+                    `data-usuid="${value.id}">Actualizar` +
+                    `</button></td>` +
                     `</tr>`);
             });
         }
