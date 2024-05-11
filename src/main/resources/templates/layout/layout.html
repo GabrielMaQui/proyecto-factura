@@ -2,48 +2,48 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="head">
-    <meta charset="UTF-8"/>
+    <meta charset="utf-8"/>
     <title th:text="'Sistema de Facturación-' + ${titulo}"></title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
-    <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/footer.css}"/>
     <script th:src="@{/js/bootstrap.bundle.js}" type="text/javascript"></script>
     <script th:src="@{/js/jquery.js}" type="text/javascript"></script>
     <meta name="_csrf" th:content="${_csrf.token}"/>
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
 <header th:fragment="header">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Spring Boot</a>
+        <a class="navbar-brand" th:href="@{/listar}">TechNova</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse"
                 aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" th:href="@{/listar}">Clientes</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" th:href="@{/producto}">Productos</a></li>
-                <li class="nav-item"><a class="nav-link" href="#" th:href="@{/seguridad/usuario}">Vendedores</a></li>
+                <li class="nav-item"><a class="nav-link"  th:href="@{/listar}">Clientes</a></li>
+                <li class="nav-item"><a class="nav-link" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/producto}">Productos</a></li>
+                <li class="nav-item"><a class="nav-link" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/seguridad/usuario}">Vendedores</a></li>
             </ul>
             <ul class="navbar-nav navbar-right">
-                <li sec:authorize="!isAuthenticated()"><a
-                        class="btn btn-outline-primary" th:href="@{/login}">Sign In</a></li>
+                <li sec:authorize="!isAuthenticated()">
+                    <a class="btn btn-outline-primary" th:href="@{/login}">Sign In</a>
+                </li>
+                <li sec:authorize="isAuthenticated()" class="nav-item">
+                    <a class="nav-link" href="#" role="button" id="dropdownMenuLink">
+                        <span sec:authentication="name"></span>
+                    </a>
+                </li>
+                <li sec:authorize="isAuthenticated()" class="nav-item" >
 
-                <li sec:authorize="isAuthenticated()" class="dropdown show">
-                    <a class="btn btn-outline-primary dropdown-toggle" href="#"
-                       role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false"><span sec:authentication="name"></span></a>
-
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <form id="logoutForm" th:action="@{/logout}" method="post">
-                            <button class="dropdown-item" onclick="document.getElementById('logoutForm').submit();"
-                                    type="submit">Sign Out
-                            </button>
+                            <button class="btn btn-primary" onclick="document.getElementById('logoutForm').submit();" type="submit">Sign Out</button>
                             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
                         </form>
-                    </div>
+
                 </li>
             </ul>
         </div>
@@ -58,28 +58,33 @@
 
 <div class="container"></div>
 
-<footer th:fragment="footer" class="container">
-    <hr/>
-    <img th:src="@{/images/spring.png}" alt="Spring logo"/>
-    <p sec:authorize="isAuthenticated()">
-        Usuario logeado: <span sec:authentication="name"></span> | Roles: <span
-            sec:authentication="principal.authorities"></span>
-    </p>
-    <p>
-        Powered by <a href="https://projects.spring.io/spring-boot/">Spring
-        Boot</a> y <a href="http://www.thymeleaf.org">Thymeleaf</a>.
-    </p>
-    <p>
-        Este proyecto fue desarrollado en IDE Eclipse + Spring Plugins (STS
-        Spring Tool), profesor Andrés Guzmán.<br/> &copy; Company 2017,
-        Inc. Todos los derechos reservados. Términos de uso y privacidad.<br/>
-    </p>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Bootstrap JS -->
-    <script th:src="@{/js/jquery-3.2.1.min.js}"></script>
-    <script th:src="@{/js/popper.min.js}"></script>
-    <script th:src="@{/js/bootstrap.min.js}"></script>
-    <script th:src="@{/js/jquery-ui.min.js}"></script>
-</footer>
+<footer th:fragment="footer" class="bg-dark text-white py-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h5>Contacto</h5>
+                <p>Dirección: 123 Calle Principal, Arequipa</p>
+                <p>Teléfono: (123) 456-7890</p>
+                <p>Correo electrónico: info@example.com</p>
+            </div>
+            <div class="col-md-4">
+                <h5>Síguenos</h5>
+                <ul class="list-inline">
+                    <li class="list-inline-item"><a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a></li>
+                    <li class="list-inline-item"><a href="#" class="text-white"><i class="fab fa-twitter"></i></a></li>
+                    <li class="list-inline-item"><a href="#" class="text-white"><i class="fab fa-instagram"></i></a></li>
+                    <li class="list-inline-item"><a href="#" class="text-white"><i class="fab fa-linkedin"></i></a></li>
+                </ul>
+            </div>
+            <div class="col-md-4 text-center">
+                <img th:src="@{/images/logo.png}" alt="Logo" class="img-fluid mb-3" style="max-height: 80px;">
+                <p th:if="${#authorization.expression('isAuthenticated()')}">
+                    Usuario: <span sec:authentication="name" class="fw-bold"></span><br/>
+                    Roles: <span sec:authentication="principal.authorities" class="fw-bold"></span>
+                </p>
+                <p class="mb-0">Derechos de autor © 2024. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </div></footer>
 </body>
 </html>

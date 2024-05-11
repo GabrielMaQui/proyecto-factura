@@ -19,14 +19,13 @@
                                 value: item.id,
                                 label: item.nombre,
                                 precio: item.precio,
+
                             };
                         }));
                     },
                 });
             },
             select: function (event, ui) {
-                //$("#buscar_producto").val(ui.item.label);
-
                 if (itemsHelper.hasProducto(ui.item.value)) {
                     itemsHelper.incrementaCantidad(ui.item.value, ui.item.precio);
                     return false;
