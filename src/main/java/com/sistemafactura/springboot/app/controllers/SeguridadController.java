@@ -47,6 +47,7 @@ public class SeguridadController {
 
             if (usuarioRequest.getId() > 0) {
                 usuario.setId(usuarioRequest.getId());
+                usuario.setPassword(usuarioRequest.getPassword());
                 usuario.setEnabled(usuarioRequest.getEnabled());
                 iUsuarioService.actualizarUsuario(usuario);
             } else {

@@ -15,11 +15,12 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "UPDATE usuario SET nombre=:nombres, apellido=:apellidos, " +
-            "enabled=:activo WHERE id=:idusuario",
+    @Query(value = "UPDATE users SET nombre=:nombres, apellido=:apellidos, " +
+            "enabled=:activo, password=:password WHERE id=:idusuario",
             nativeQuery = true)
     void actualizarUsuario(@Param("nombres") String nombres,
                            @Param("apellidos") String apellidos,
                            @Param("activo") boolean activo,
+                           @Param("password") String password,
                            @Param("idusuario") Long idusuario);
 }

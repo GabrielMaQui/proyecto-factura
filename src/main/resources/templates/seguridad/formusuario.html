@@ -31,7 +31,7 @@
                 <td th:text="${usuario.nombre}"></td>
                 <td th:text="${usuario.apellido}"></td>
                 <td th:text="${usuario.username}"></td>
-                <td th:text="${usuario.enabled}"></td>
+                <td th:text="${usuario.enabled ? 'activo' : 'inactivo'}"></td>
                 <td>
                     <button type="button" class="btn btn-primary btnactualizar"
                             th:data-usuid="${usuario.id}">Actualizar
@@ -68,14 +68,21 @@
                     <label for="txtusuario">Usuario</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="txtpassword"
-                           placeholder="name@example.com">
-                    <label for="txtpassword">Contraseña</label>
+                    <input type="password" class="form-control" id="txtNuevaContraseña" name="nuevaContraseña" >
+                    <label for="txtNuevaContraseña">Nueva Contraseña</label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="txtConfirmarContraseña" name="confirmarContraseña">
+                    <label for="txtConfirmarContraseña">Confirmar Nueva Contraseña</label>
                 </div>
 
                 <div class="form-check form-switch" id="switchusuario">
                     <input class="form-check-input" type="checkbox" role="switch" id="cbactivo">
                     <label class="form-check-label" for="cbactivo">Activo</label>
+                </div>
+                <div class="form">
+                    <input class="form-control" id="txtpassword" hidden="true">
                 </div>
                 <input type="hidden" id="hddidusuario" value="0">
             </div>

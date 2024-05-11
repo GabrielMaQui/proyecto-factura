@@ -39,7 +39,6 @@ public class UsuarioService implements IUsuarioService {
     @Override
     public Usuario obtenerUsuarioxId(long id) {
         Usuario usuario = usuarioRepository.findById(id).orElse(null);
-        usuario.setPassword("");
         return usuario;
     }
 
@@ -47,7 +46,7 @@ public class UsuarioService implements IUsuarioService {
     public void actualizarUsuario(Usuario usuario) {
         usuarioRepository.actualizarUsuario(
                 usuario.getNombre(), usuario.getApellido(),
-                usuario.getEnabled(), usuario.getId()
+                usuario.getEnabled(), bCryptPasswordEncoder.encode(usuario.getPassword()), usuario.getId()
         );
     }
 }

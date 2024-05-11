@@ -20,14 +20,18 @@ $(document).on("click", ".btnactualizar", function () {
         url: "/seguridad/usuario/" + $(this).attr("data-usuid"),
         dataType: "json",
         success: function (resultado) {
-            $("#txtnombre").val(resultado.nombres);
-            $("#txtapellido").val(resultado.apellidos);
-            $("#txtusuario").val(resultado.nomusuario);
+            $("#txtnombre").val(resultado.nombre);
+            $("#txtapellido").val(resultado.apellido);
+            $("#txtusuario").val(resultado.username);
             $("#txtusuario").prop('readonly', true);
-            $("#hddidusuario").val(resultado.idusuario);
+            $("#hddidusuario").val(resultado.id);
+            $("#txtpassword").val(resultado.password);
+            $("#txtNuevaContraseña").val("");
+            $("#txtConfirmarContraseña").val("");
+
             $("#switchusuario").show();
             $("#btnenviar").show();
-            if (resultado.activo)
+            if (resultado.enabled)
                 $("#cbactivo").prop("checked", true);
             else
                 $("#cbactivo").prop("checked", false);
@@ -37,6 +41,18 @@ $(document).on("click", ".btnactualizar", function () {
 })
 
 $(document).on("click", "#btnguardar", function () {
+
+    let nuevaContraseña = $("#txtNuevaContraseña").val();
+    let confirmarContraseña = $("#txtConfirmarContraseña").val();
+
+    if (nuevaContraseña !== confirmarContraseña) {
+        alert("La nueva contraseña y la confirmación de contraseña no coinciden.");
+        return;
+    }
+    if(nuevaContraseña == ""){
+        nuevaContraseña = $("#txtpassword").val();
+    }
+
     $.ajax({
         type: "POST",
         url: "/seguridad/usuario/registrar",
@@ -46,7 +62,7 @@ $(document).on("click", "#btnguardar", function () {
             username: $("#txtusuario").val(),
             nombres: $("#txtnombre").val(),
             apellidos: $("#txtapellido").val(),
-            password: $("#txtpassword").val(),
+            password: nuevaContraseña,
             enabled: $("#cbactivo").prop("checked")
         }),
         success: function (resultado) {
@@ -58,7 +74,6 @@ $(document).on("click", "#btnguardar", function () {
     });
     $("#modalusuario").modal("hide");
 });
-
 function listarUsuarios() {
     $.ajax({
         type: "GET",
@@ -67,11 +82,12 @@ function listarUsuarios() {
         success: function (resultado) {
             $("#tblusuario > tbody").html("");
             $.each(resultado, function (index, value) {
+                let estado = value.enabled ? 'activo' : 'inactivo';
                 $("#tblusuario > tbody").append(`<tr>` +
                     `<td>${value.nombre}</td>` +
                     `<td>${value.apellido}</td>` +
                     `<td>${value.username}</td>` +
-                    `<td>${value.enabled}</td>` +
+                    `<td>${estado}</td>` +
                     `<td><button type='button' class='btn btn-primary btnactualizar' ` +
                     `data-usuid="${value.id}">Actualizar` +
                     `</button></td>` +
