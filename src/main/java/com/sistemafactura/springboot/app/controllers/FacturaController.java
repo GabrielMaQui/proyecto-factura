@@ -28,7 +28,7 @@ import com.sistemafactura.springboot.app.models.entity.ItemFactura;
 import com.sistemafactura.springboot.app.models.entity.Producto;
 import com.sistemafactura.springboot.app.service.IClienteService;
 
-@Secured("ROLE_ADMIN")
+
 @Controller
 @RequestMapping("/factura")
 @SessionAttributes("factura")
@@ -118,6 +118,7 @@ public class FacturaController {
         return "redirect:/ver/" + factura.getCliente().getId();
     }
 
+    @Secured("ROLE_ADMIN")
     @GetMapping("/eliminar/{id}")
     public String eliminar(@PathVariable Long id, RedirectAttributes flash) {
 

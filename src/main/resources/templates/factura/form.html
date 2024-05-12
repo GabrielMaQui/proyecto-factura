@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout/layout :: head"></head>
+<head>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+    <link rel="stylesheet" th:href="@{/css/jquery-ui.min.css}" />
+</head>
 <body>
 
-<header th:replace="layout/layout :: header"></header>
+<header th:replace="~{layout/layout::header}"></header>
 
 <div class="container py-4">
     <div class="card bg-light">
@@ -64,6 +67,7 @@
                         <th>Nombre</th>
                         <th>Precio</th>
                         <th>Cantidad</th>
+                        <th>Stock</th>
                         <th>Total</th>
                         <th>Eliminar</th>
                     </tr>
@@ -82,7 +86,12 @@
         </div>
     </div>
 </div>
-<footer th:replace="layout/layout :: footer"></footer>
-<script th:replace="factura/js/autocomplete-productos :: javascript"></script>
+<footer th:replace="~{layout/layout :: footer}"></footer>
+<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.bundle.js}"></script>
+<script th:src="@{/js/jquery-ui.min.js}"></script>
+<script th:replace="~{factura/js/autocomplete-productos::javascript}"></script>
+
 </body>
 </html>

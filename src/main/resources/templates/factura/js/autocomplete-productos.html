@@ -19,15 +19,30 @@
                                 value: item.id,
                                 label: item.nombre,
                                 precio: item.precio,
-
+                                stock: item.stock
                             };
                         }));
                     },
                 });
             },
             select: function (event, ui) {
+                var cantidadEnCarrito = itemsHelper.getCantidadEnCarrito(ui.item.value);
+                var cantidadDisponible = ui.item.stock - cantidadEnCarrito;
+
+
+                if (cantidadDisponible <= 0) {
+                    alert("No hay suficiente stock disponible para este producto.");
+                    return false;
+                }
+
+
+                var cantidadAAgregar = 1;
+                if (cantidadEnCarrito > 0) {
+                    cantidadAAgregar = Math.min(1, cantidadDisponible);
+                }
+
                 if (itemsHelper.hasProducto(ui.item.value)) {
-                    itemsHelper.incrementaCantidad(ui.item.value, ui.item.precio);
+                    itemsHelper.incrementaCantidad(ui.item.value, ui.item.precio, cantidadAAgregar);
                     return false;
                 }
 
@@ -36,14 +51,14 @@
                 linea = linea.replace(/{ID}/g, ui.item.value);
                 linea = linea.replace(/{NOMBRE}/g, ui.item.label);
                 linea = linea.replace(/{PRECIO}/g, ui.item.precio);
+                linea = linea.replace(/{STOCK}/g, cantidadDisponible);
 
                 $("#cargarItemProductos tbody").append(linea);
-                itemsHelper.calcularImporte(ui.item.value, ui.item.precio, 1);
+                itemsHelper.calcularImporte(ui.item.value, ui.item.precio, cantidadAAgregar);
 
                 return false;
             }
         });
-
         $("form").submit(function () {
             $("#plantillaItemsFactura").remove();
             return;
@@ -68,11 +83,38 @@
 
             return resultado;
         },
-        incrementaCantidad: function (id, precio) {
-            var cantidad = $("#cantidad_" + id).val() ? parseInt($("#cantidad_" + id).val()) : 0;
-            $("#cantidad_" + id).val(++cantidad);
-            this.calcularImporte(id, precio, cantidad);
+
+        getStockDisponible: function (id) {
+            var stock = 0;
+
+            $('input[name="item_id[]"]').each(function () {
+                if (parseInt(id) == parseInt($(this).val())) {
+                    stock++;
+                }
+            });
+
+            return stock;
         },
+
+        getStockTotal: function (id) {
+            var stock = parseInt($("#stock_" + id).val());
+            return isNaN(stock) ? 0 : stock;
+        },
+
+        getCantidadEnCarrito: function (id) {
+            var cantidad = parseInt($("#cantidad_" + id).val());
+            return isNaN(cantidad) ? 0 : cantidad;
+        },
+
+        incrementaCantidad: function (id, precio, cantidadAAgregar) {
+            var cantidadEnCarrito = this.getCantidadEnCarrito(id);
+            var cantidadDisponible = this.getStockTotal(id) - this.getStockDisponible(id);
+
+            cantidadAAgregar = Math.min(cantidadAAgregar, cantidadDisponible);
+            $("#cantidad_" + id).val(cantidadEnCarrito + cantidadAAgregar);
+            this.calcularImporte(id, precio, cantidadEnCarrito + cantidadAAgregar);
+        },
+
         eliminarLineaFactura: function (id) {
             $("#row_" + id).remove();
             this.calcularGranTotal();
