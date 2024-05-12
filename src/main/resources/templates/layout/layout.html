@@ -5,7 +5,7 @@
     <meta charset="utf-8"/>
     <title th:text="'Sistema de Facturación-' + ${titulo}"></title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
-    <link rel="stylesheet" th:href="@{/css/footer.css}"/>
+
     <script th:src="@{/js/bootstrap.bundle.js}" type="text/javascript"></script>
     <script th:src="@{/js/jquery.js}" type="text/javascript"></script>
     <meta name="_csrf" th:content="${_csrf.token}"/>
@@ -58,7 +58,7 @@
 
 <div class="container"></div>
 
-<footer th:fragment="footer" class="bg-dark text-white py-4">
+<footer th:fragment="footer" class="bg-dark text-lg-start text-white py-4">
     <div class="container">
         <div class="row">
             <div class="col-md-4">
@@ -85,6 +85,8 @@
                 <p class="mb-0">Derechos de autor © 2024. Todos los derechos reservados.</p>
             </div>
         </div>
-    </div></footer>
+    </div>
+</footer>
+
 </body>
 </html>

@@ -77,7 +77,7 @@ public class ClienteController {
 
         model.put("cliente", cliente);
         model.put("titulo", "Detalle cliente: " + cliente.getNombre());
-        return "ver";
+        return "cliente/ver";
     }
 
     @RequestMapping(value = {"/listar", "/"}, method = RequestMethod.GET)
@@ -122,7 +122,7 @@ public class ClienteController {
         model.addAttribute("titulo", "Listado de clientes");
         model.addAttribute("clientes", clientes);
         model.addAttribute("page", pageRender);
-        return "listar";
+        return "cliente/listar";
     }
 
 
@@ -132,7 +132,7 @@ public class ClienteController {
         Cliente cliente = new Cliente();
         model.put("cliente", cliente);
         model.put("titulo", "Formulario de Cliente");
-        return "form";
+        return "cliente/form";
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -153,7 +153,7 @@ public class ClienteController {
         }
         model.put("cliente", cliente);
         model.put("titulo", "Editar Cliente");
-        return "form";
+        return "cliente/form";
     }
 
 
@@ -163,7 +163,7 @@ public class ClienteController {
 
         if (result.hasErrors()) {
             model.addAttribute("titulo", "Formulario de Cliente");
-            return "form";
+            return "cliente/form";
         }
 
         if (!foto.isEmpty()) {
